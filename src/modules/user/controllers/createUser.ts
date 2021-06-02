@@ -1,7 +1,4 @@
-export type HttpResponse = {
-  statusCode: number
-  body?: any
-}
+import { HttpResponse } from "../protocols/http";
 
 export class createUserController {
   async handle(request: any): Promise<HttpResponse> {
