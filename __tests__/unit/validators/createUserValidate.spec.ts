@@ -1,22 +1,24 @@
-import { createUserValidation } from '@modules/user/providers/createUserValidator'
+import { createUserValidation } from '@modules/user/providers/createUserJoiSchema'
 import { BaseError } from '@shared/errors/BaseError'
-import JoiAppValidation from '@shared/infra/validators/JoiValidator'
+import { JoiAppValidation } from '@shared/infra/validators/JoiValidator'
 
 const makeSut = () => {
-  return new JoiAppValidation(createUserValidation)
+  const sut = new JoiAppValidation(createUserValidation)
+  return { sut }
 }
 
 describe('[VALIDATION] - create user', () => {
-  it('Should return error if no user name is provided', () => {
-    const { validate } = makeSut()
+
+  it('Should return error if no user name is provided', async () => {
+    const { sut } = makeSut()
     const request = {
-      phone: 123,
-      lastname: 'silva'
+      lastname: "Doe",
+      phone: "+55119988023212",
     }
     try {
-      validate(request)
+      sut.validate(request)
     } catch (error) {
-      expect(error).toBeInstanceOf(BaseError)
+      expect(error instanceof BaseError).toBe(true)
       expect(error.message).toBe("\"name\" is required")
       expect(error.statusCode).toBe(400)
     }

@@ -1,15 +1,35 @@
-import JoiAppValidation from '@shared/infra/validators/JoiValidator'
 import { createUserController } from '@modules/user/controllers/createUser'
-import { createUserValidation } from '@modules/user/providers/createUserValidator'
+import { UseCase } from '@shared/protocols/useCase';
+import { Validation } from '@shared/protocols/validator'
+
+const makeCompanySignUpService = () => {
+  class CompanySignUpStub implements UseCase {
+    async execute(data: any): Promise<void> {
+      return new Promise((resolve) => resolve());
+    }
+  }
+  return new CompanySignUpStub();
+};
+
+export const makeValidation = () => {
+  class ValidationSignUpStub implements Validation {
+    validate(data: any): Error | void {
+    }
+  }
+  return new ValidationSignUpStub();
+};
+
 
 const makeSut = () => {
-  const validation = new JoiAppValidation(createUserValidation)
-  return new createUserController(validation)
+  const validation = makeValidation()
+  const createUserService = makeCompanySignUpService()
+  const sut = new createUserController(createUserService, validation)
+  return { sut }
 }
 
 describe('[CONTROLLER] - Create user', () => {
   it('should return a success message if all parameters are valid', async () => {
-    const { handle } = makeSut()
+    const { sut } = makeSut()
     const request = {
       name: "John",
       lastname: "Doe",
@@ -21,8 +41,8 @@ describe('[CONTROLLER] - Create user', () => {
       "success": true,
       "message": "User successfully registered!"
     }
-    const response = await handle(request)
-    expect(response.statusCode).toBe(201)
+    const response = await sut.handle(request)
     expect(response.body).toEqual(sucess)
+    expect(response.statusCode).toBe(201)
   })
 })
