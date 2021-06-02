@@ -39,4 +39,19 @@ describe('[VALIDATION] - create user', () => {
       expect(error.statusCode).toBe(400)
     }
   })
+  it('Should return error if no user phone is provided', async () => {
+    const { sut } = makeSut()
+    const request = {
+      name: "Doe",
+      lastname: "qwe",
+      cpf: "12312312312"
+    }
+    try {
+      sut.validate(request)
+    } catch (error) {
+      expect(error instanceof BaseError).toBe(true)
+      expect(error.message).toBe("\"phone\" is required")
+      expect(error.statusCode).toBe(400)
+    }
+  })
 })
