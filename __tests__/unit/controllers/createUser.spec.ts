@@ -24,7 +24,7 @@ const makeSut = () => {
   const validation = makeValidation()
   const createUserService = makeCompanySignUpService()
   const sut = new createUserController(createUserService, validation)
-  return { sut }
+  return { sut, validation, createUserService }
 }
 
 describe('[CONTROLLER] - Create user', () => {
@@ -44,5 +44,17 @@ describe('[CONTROLLER] - Create user', () => {
     const response = await sut.handle(request)
     expect(response.body).toEqual(sucess)
     expect(response.statusCode).toBe(201)
+  })
+  it('should calls create user validation with valid data', async () => {
+    const { sut, validation } = makeSut()
+    const spyValidation = jest.spyOn(validation, 'validate')
+    const request = {
+      name: "John",
+      lastname: "Doe",
+      phone: "+55119988023212",
+      cpf: 12391239123,
+    }
+    await sut.handle(request)
+    expect(spyValidation).toHaveBeenCalledWith(request)
   })
 })
