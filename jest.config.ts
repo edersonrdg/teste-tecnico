@@ -1,12 +1,20 @@
+import { resolve } from 'path';
+
 export default {
-  coveragePathIgnorePatterns: [
-    '\\\\node_modules\\\\'
-  ],
+  roots: ['<rootDir>/__tests__'],
+  coverageDirectory: 'coverage',
   coverageProvider: 'v8',
-  preset: 'ts-jest',
   testEnvironment: 'node',
+  coveragePathIgnorePatterns: [
+    '\\\\node_modules\\\\',
+  ],
+  moduleNameMapper: {
+    '^@modules/(.*)$': resolve(__dirname, './src/modules/$1'),
+    '^@shared/(.*)$': resolve(__dirname, './src/shared/$1'),
+    '^@config/(.*)$': resolve(__dirname, './src/config/$1'),
+  },
+  preset: 'ts-jest',
   testMatch: [
-    '**/__tests__/**/*.[jt]s?(x)',
-    '**/?(*.)+(spec|test).[tj]s?(x)'
-  ]
-}
+    '**/?(*.)+(spec|test).[tj]s?(x)',
+  ],
+};

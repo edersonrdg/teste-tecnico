@@ -1,4 +1,4 @@
-import { HttpResponse } from "../../modules/user/protocols/http";
+import { HttpResponse } from "../protocols/http";
 
 export const created = (): HttpResponse => ({
   statusCode: 201,
