@@ -1,4 +1,5 @@
 import Joi from '@hapi/joi'
+import { BaseError } from '@shared/errors/BaseError';
 import { cpf } from 'cpf-cnpj-validator';
 
 const createUserValidation = Joi.object({
@@ -9,5 +10,5 @@ const createUserValidation = Joi.object({
 
 export function validate(data: any): Error | void {
     const { error } = createUserValidation.validate(data)
-    if (error) throw new Error(error.message)
+    if (error) throw new BaseError(error.message)
 }

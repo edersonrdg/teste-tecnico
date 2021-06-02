@@ -1,3 +1,4 @@
+import { BaseError } from '@shared/errors/BaseError'
 import { validate } from '../../../src/modules/user/providers/createUserValidator'
 
 describe('[VALIDATION] - create user', () => {
@@ -9,7 +10,9 @@ describe('[VALIDATION] - create user', () => {
     try {
       validate(request)
     } catch (error) {
+      expect(error).toBeInstanceOf(BaseError)
       expect(error.message).toBe("\"name\" is required")
+      expect(error.statusCode).toBe(400)
     }
   })
 })
