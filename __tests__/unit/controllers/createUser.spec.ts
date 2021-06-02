@@ -1,18 +1,22 @@
-import { createUserController } from '../../../src/modules/user/controllers/createUser'
+import JoiAppValidation from '@shared/infra/validators/JoiValidator'
+import { createUserController } from '@modules/user/controllers/createUser'
+import { createUserValidation } from '@modules/user/providers/createUserValidator'
 
 const makeSut = () => {
-  return new createUserController()
+  const validation = new JoiAppValidation(createUserValidation)
+  return new createUserController(validation)
 }
 
 describe('[CONTROLLER] - Create user', () => {
   it('should return a success message if all parameters are valid', async () => {
     const { handle } = makeSut()
     const request = {
-      "name": "John",
-      "lastname": "Doe",
-      "phone": "+55119988023212",
-      "cpf": "01223284721"
+      name: "John",
+      lastname: "Doe",
+      phone: "+55119988023212",
+      cpf: 12391239123,
     }
+
     const sucess = {
       "success": true,
       "message": "User successfully registered!"
