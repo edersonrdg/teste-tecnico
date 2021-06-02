@@ -1,5 +1,5 @@
 import server from '@shared/infra/express/server'
-import '../../orm/index'
+import '../../typeorm/index'
 
 const expressServer = () => {
   try {

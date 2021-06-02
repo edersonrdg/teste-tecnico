@@ -7,7 +7,8 @@
     "build": "tsc",
     "start:dev": "tsnd -r tsconfig-paths/register --inspect --ignore-watch node_modules src/index.ts",
     "start": "ts-node src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register  ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
