@@ -1,4 +1,4 @@
-import expressServer from "./main/express/server"
+import expressServer from './config/expressServer'
 
 const bootstrap = () => {
   expressServer()
