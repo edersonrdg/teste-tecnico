@@ -69,4 +69,21 @@ describe('[VALIDATION] - create user', () => {
       expect(error.statusCode).toBe(400)
     }
   })
+  it('Should return error if user cpf is invalid', async () => {
+    const { sut } = makeSut()
+    const request = {
+      name: "Doe",
+      lastname: "qwe",
+      phone: "+55119988023212",
+      cpf: "33"
+    }
+
+    try {
+      sut.validate(request)
+    } catch (error) {
+      expect(error instanceof BaseError).toBe(true)
+      expect(error.message).toBe("\"cpf\" length must be 11 characters long")
+      expect(error.statusCode).toBe(400)
+    }
+  })
 })
