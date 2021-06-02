@@ -1,4 +1,4 @@
-import server from '../shared/infra/express/server'
+import server from '@shared/infra/express/server'
 
 const expressServer = () => {
   try {

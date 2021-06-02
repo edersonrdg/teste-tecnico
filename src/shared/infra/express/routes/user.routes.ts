@@ -1,7 +1,9 @@
 import { Router } from 'express'
+import { adapt } from '../config/expressAdapter'
+import { makeCreateUserFactory } from '@modules/user/factory'
 
 const userRouter = Router()
 
-userRouter.post('/', (req, res) => res.send('user'))
+userRouter.post('/', adapt(makeCreateUserFactory()))
 
 export default userRouter
