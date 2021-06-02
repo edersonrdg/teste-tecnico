@@ -17,7 +17,7 @@ export class createUserController implements Controller {
       await this.createUser.execute(request)
       return created()
     } catch (error) {
-      return { statusCode: 400, body: { error: error.message }}
+      return { statusCode: 500, body: { error: 'internal server error' }}
     }
   }
 }
