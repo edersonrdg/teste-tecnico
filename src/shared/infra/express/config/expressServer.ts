@@ -1,4 +1,5 @@
 import server from '@shared/infra/express/server'
+import '../../orm/index'
 
 const expressServer = () => {
   try {
