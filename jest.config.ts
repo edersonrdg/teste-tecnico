@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import { compilerOptions } from './tsconfig.json'
 
 export default {
   roots: ['<rootDir>/__tests__'],
