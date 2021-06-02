@@ -1,5 +1,5 @@
 import { Controller } from "@shared/protocols/controller";
-import { created } from "@shared/helpers/http-helper";
+import { created, errorTreatment } from "@shared/helpers/http-helper";
 import { HttpResponse } from "@shared/protocols/http";
 import { CreateUserDTO } from "../dtos/CreateUserDTO";
 import { UseCase } from "@shared/protocols/useCase";
@@ -17,7 +17,7 @@ export class createUserController implements Controller {
       await this.createUser.execute(request)
       return created()
     } catch (error) {
-      return { statusCode: 500, body: { error: 'internal server error' }}
+      return errorTreatment(error)
     }
   }
 }
