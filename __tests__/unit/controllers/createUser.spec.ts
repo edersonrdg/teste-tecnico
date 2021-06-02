@@ -84,4 +84,20 @@ describe('[CONTROLLER] - Create user', () => {
       expect(error.statusCode).toBe(500);
     }
   })
+  it('should return Error if create user validation throws', async () => {
+    const { sut, createUserService } = makeSut()
+    jest.spyOn(createUserService, 'execute').mockImplementation(() => { throw new Error() })
+    const request = {
+      name: "John",
+      lastname: "Doe",
+      phone: "+55119988023212",
+      cpf: 12391239123,
+    }
+    try {
+      await sut.handle(request)
+    } catch (error) {
+      expect(error.message).toEqual('Internal server error');
+      expect(error.statusCode).toBe(500);
+    }
+  })
 })
