@@ -2,13 +2,13 @@ import { createUserController } from '@modules/user/controllers/createUser'
 import { UseCase } from '@shared/protocols/useCase';
 import { Validation } from '@shared/protocols/validator'
 
-const makeCompanySignUpService = () => {
-  class CompanySignUpStub implements UseCase {
+const makeCreateUserService = () => {
+  class CreateUserStub implements UseCase {
     async execute(data: any): Promise<void> {
       return new Promise((resolve) => resolve());
     }
   }
-  return new CompanySignUpStub();
+  return new CreateUserStub();
 };
 
 export const makeValidation = () => {
@@ -19,10 +19,9 @@ export const makeValidation = () => {
   return new ValidationSignUpStub();
 };
 
-
 const makeSut = () => {
   const validation = makeValidation()
-  const createUserService = makeCompanySignUpService()
+  const createUserService = makeCreateUserService()
   const sut = new createUserController(createUserService, validation)
   return { sut, validation, createUserService }
 }
@@ -68,5 +67,21 @@ describe('[CONTROLLER] - Create user', () => {
     }
     await sut.handle(request)
     expect(spyService).toHaveBeenCalledWith(request)
+  })
+  it('should return Error if create user validation throws', async () => {
+    const { sut, validation } = makeSut()
+    jest.spyOn(validation, 'validate').mockImplementation(() => { throw new Error() })
+    const request = {
+      name: "John",
+      lastname: "Doe",
+      phone: "+55119988023212",
+      cpf: 12391239123,
+    }
+    try {
+      await sut.handle(request)
+    } catch (error) {
+      expect(error.message).toEqual('Internal server error');
+      expect(error.statusCode).toBe(500);
+    }
   })
 })
