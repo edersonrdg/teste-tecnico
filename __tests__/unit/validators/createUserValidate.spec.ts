@@ -54,4 +54,19 @@ describe('[VALIDATION] - create user', () => {
       expect(error.statusCode).toBe(400)
     }
   })
+  it('Should return error if no user cpf is provided', async () => {
+    const { sut } = makeSut()
+    const request = {
+      name: "Doe",
+      lastname: "qwe",
+      phone: "+55119988023212",
+    }
+    try {
+      sut.validate(request)
+    } catch (error) {
+      expect(error instanceof BaseError).toBe(true)
+      expect(error.message).toBe("\"cpf\" is required")
+      expect(error.statusCode).toBe(400)
+    }
+  })
 })
