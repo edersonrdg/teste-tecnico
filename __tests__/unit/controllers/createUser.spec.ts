@@ -57,4 +57,16 @@ describe('[CONTROLLER] - Create user', () => {
     await sut.handle(request)
     expect(spyValidation).toHaveBeenCalledWith(request)
   })
+  it('should calls create user service with valid data', async () => {
+    const { sut, createUserService } = makeSut()
+    const spyService = jest.spyOn(createUserService, 'execute')
+    const request = {
+      name: "John",
+      lastname: "Doe",
+      phone: "+55119988023212",
+      cpf: 12391239123,
+    }
+    await sut.handle(request)
+    expect(spyService).toHaveBeenCalledWith(request)
+  })
 })
