@@ -6,9 +6,7 @@ export default {
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   testEnvironment: 'node',
-  coveragePathIgnorePatterns: [
-    '\\\\node_modules\\\\',
-  ],
+  coveragePathIgnorePatterns: ['node_modules'],
   moduleNameMapper: {
     '^@modules/(.*)$': resolve(__dirname, './src/modules/$1'),
     '^@shared/(.*)$': resolve(__dirname, './src/shared/$1'),
