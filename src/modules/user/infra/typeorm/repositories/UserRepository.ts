@@ -1,6 +1,6 @@
 import { CreateUserDTO } from "@modules/user/dtos/CreateUserDTO";
 import UserRepository from "@modules/user/repositories/UserRepository";
-import { getRepository, Repository } from "typeorm";
+import { getRepository } from "typeorm";
 import User from "../model/User";
 
 export class UserRepositoryPG implements UserRepository {
@@ -8,5 +8,14 @@ export class UserRepositoryPG implements UserRepository {
     const repository = getRepository(User)
     const user = repository.create(data)
     await repository.save(user)
+  }
+  async findByCpf(cpf: string): Promise<User | void> {
+    const repository = getRepository(User)
+    const user = await repository.findOne({
+      where: {
+        cpf
+      }
+    })
+    return user
   }
 }
