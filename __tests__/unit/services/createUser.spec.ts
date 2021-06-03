@@ -20,4 +20,16 @@ describe('[SERVICE] - Create user', () => {
     await sut.execute(request)
     expect(sut.execute(request)).rejects.toBeInstanceOf(BaseError)
   })
+  it('Should call findByCpf with valid data', async () => {
+    const { sut, userRepository } = makeSut()
+    const repositorySpy = jest.spyOn(userRepository, 'findByCpf')
+    const request = {
+      name: "John",
+      lastname: "Doe",
+      phone: "+55119988023212",
+      cpf: '12391239123',
+    }
+    await sut.execute(request)
+    expect(repositorySpy).toHaveBeenCalledWith(request.cpf)
+  })
 })
