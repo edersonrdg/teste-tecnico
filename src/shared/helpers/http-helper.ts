@@ -18,5 +18,6 @@ export const serverError = (): HttpResponse => ({
 
 export const errorTreatment = (error: Error): HttpResponse => {
   if (error instanceof BaseError) return appError(error.message, error.statusCode);
+  console.error(error)
   return serverError();
 };

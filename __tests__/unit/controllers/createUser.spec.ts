@@ -33,7 +33,7 @@ describe('[CONTROLLER] - Create user', () => {
       name: "John",
       lastname: "Doe",
       phone: "+55119988023212",
-      cpf: 12391239123,
+      cpf: '12391239123',
     }
 
     const sucess = {
@@ -51,7 +51,7 @@ describe('[CONTROLLER] - Create user', () => {
       name: "John",
       lastname: "Doe",
       phone: "+55119988023212",
-      cpf: 12391239123,
+      cpf: '12391239123',
     }
     await sut.handle(request)
     expect(spyValidation).toHaveBeenCalledWith(request)
@@ -63,7 +63,7 @@ describe('[CONTROLLER] - Create user', () => {
       name: "John",
       lastname: "Doe",
       phone: "+55119988023212",
-      cpf: 12391239123,
+      cpf: '12391239123',
     }
     await sut.handle(request)
     expect(spyService).toHaveBeenCalledWith(request)
@@ -75,7 +75,7 @@ describe('[CONTROLLER] - Create user', () => {
       name: "John",
       lastname: "Doe",
       phone: "+55119988023212",
-      cpf: 12391239123,
+      cpf: '12391239123',
     }
     try {
       await sut.handle(request)
@@ -91,7 +91,7 @@ describe('[CONTROLLER] - Create user', () => {
       name: "John",
       lastname: "Doe",
       phone: "+55119988023212",
-      cpf: 12391239123,
+      cpf: '12391239123',
     }
     try {
       await sut.handle(request)

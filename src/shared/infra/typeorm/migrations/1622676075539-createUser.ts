@@ -9,9 +9,10 @@ export class createUser1622676075539 implements MigrationInterface {
           columns: [
             {
               name: 'id',
-              type: 'varchar',
+              type: 'uuid',
               isPrimary: true,
-              generationStrategy: 'uuid'
+              generationStrategy: 'uuid',
+              default: 'uuid_generate_v4()'
             },
             {
               name: 'name',
@@ -47,5 +48,4 @@ export class createUser1622676075539 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
       await queryRunner.dropTable('users')
     }
-
 }

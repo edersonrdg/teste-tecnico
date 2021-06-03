@@ -5,10 +5,12 @@
   "username": "postgres",
   "password": "docker",
   "database": "postgres",
+  "entities": ["./src/modules/**/infra/typeorm/model/*.ts"],
   "migrations": [
     "./src/shared/infra/typeorm/migrations/*.ts"
- ],
- "cli": {
-  "migrationsDir": "./src/shared/infra/typeorm/migrations/"
-  }
+  ],
+  "cli": {
+    "migrationsDir": "./src/shared/infra/typeorm/migrations/"
+  },
+  "logging": true
 }
