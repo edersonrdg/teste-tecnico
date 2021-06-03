@@ -1,4 +1,5 @@
 import { createUserController } from '@modules/user/controllers/createUser'
+import { BaseError } from '@shared/errors/BaseError';
 import { UseCase } from '@shared/protocols/useCase';
 import { Validation } from '@shared/protocols/validator'
 
@@ -68,7 +69,7 @@ describe('[CONTROLLER] - Create user', () => {
     await sut.handle(request)
     expect(spyService).toHaveBeenCalledWith(request)
   })
-  it('should return Error if create user validation throws', async () => {
+  it('should return Error if create user validation internal throws', async () => {
     const { sut, validation } = makeSut()
     jest.spyOn(validation, 'validate').mockImplementation(() => { throw new Error() })
     const request = {
@@ -82,6 +83,23 @@ describe('[CONTROLLER] - Create user', () => {
     } catch (error) {
       expect(error.message).toEqual('Internal server error');
       expect(error.statusCode).toBe(500);
+    }
+  })
+  it('should return Error if create user validation app throws', async () => {
+    const { sut, validation } = makeSut()
+    jest.spyOn(validation, 'validate').mockImplementation(() => { throw new BaseError('app error') })
+    const request = {
+      name: "John",
+      lastname: "Doe",
+      phone: "+55119988023212",
+      cpf: '12391239123',
+    }
+    try {
+      await sut.handle(request)
+    } catch (error) {
+      expect(error instanceof BaseError).toBe(true)
+      expect(error.message).toBe('app error');
+      expect(error.statusCode).toBe(400);
     }
   })
   it('should return Error if create user validation throws', async () => {

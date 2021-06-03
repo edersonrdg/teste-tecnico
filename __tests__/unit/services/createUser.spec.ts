@@ -17,8 +17,14 @@ describe('[SERVICE] - Create user', () => {
       phone: "+55119988023212",
       cpf: '12391239123',
     }
-    await sut.execute(request)
-    expect(sut.execute(request)).rejects.toBeInstanceOf(BaseError)
+    try {
+      await sut.execute(request)
+      await sut.execute(request)
+    } catch (error) {
+      expect(error instanceof BaseError).toBe(true)
+      expect(error.message).toBe('Cpf is already used')
+      expect(error.statusCode).toBe(400)
+    }
   })
   it('Should call findByCpf with valid data', async () => {
     const { sut, userRepository } = makeSut()
