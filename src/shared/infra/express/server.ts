@@ -4,6 +4,6 @@ import routes from './routes/routes'
 const server  = express()
 
 server.use(express.json())
-server.use(routes)
+server.use('/api', routes)
 
 export default server
