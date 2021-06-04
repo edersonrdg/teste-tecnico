@@ -1,9 +1,7 @@
-sudo: false
-
 language: node_js
 
 node_js:
-- node
+  - 12
 
 script:
-  - npm test:coveralls
+  - npm test
