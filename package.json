@@ -8,7 +8,7 @@
     "start:dev": "tsnd -r tsconfig-paths/register --inspect --ignore-watch node_modules src/index.ts",
     "start": "ts-node src/index.ts",
     "test": "jest",
-    "test:coveralls": "jest --coverage && coveralls",
+    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "typeorm": "ts-node-dev -r tsconfig-paths/register  ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
