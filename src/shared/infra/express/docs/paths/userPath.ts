@@ -23,14 +23,7 @@ export const userPath = {
         }
       },
       400: {
-        description: 'Bad request',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/schemas/userSchema'
-            }
-          }
-        }
+        description: 'Bad request'
       }
     }
   }

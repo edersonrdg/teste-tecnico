@@ -1,6 +1,7 @@
 import { userPath } from './paths/userPath'
 import { userSchema } from './schemas/users'
 import { userParamsSchema } from './schemas/userParams'
+import { userResponse } from './schemas/userResponse'
 import { getUserPath } from './paths/getUserPath'
 
 export default {
@@ -20,6 +21,7 @@ export default {
   },
   schemas: {
     userSchema,
-    userParamsSchema
+    userParamsSchema,
+    userResponse
   }
 }

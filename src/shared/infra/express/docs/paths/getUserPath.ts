@@ -11,25 +11,18 @@ export const getUserPath = {
       }
     }],
     responses: {
-      201: {
+      200: {
         description: 'Sucesso',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/userSchema'
+              $ref: '#/schemas/userResponse'
             }
           }
         }
       },
       400: {
-        description: 'Bad request',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/schemas/userSchema'
-            }
-          }
-        }
+        description: 'Bad request'
       }
     }
   }
