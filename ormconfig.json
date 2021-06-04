@@ -1,10 +1,10 @@
 {
-  "type": "postgres",
-  "host": "172.17.0.2",
-  "port": 5432,
-  "username": "postgres",
+  "type": "mariadb",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
   "password": "docker",
-  "database": "postgres",
+  "database": "test",
   "entities": ["./src/modules/**/infra/typeorm/model/*.ts"],
   "migrations": [
     "./src/shared/infra/typeorm/migrations/*.ts"
