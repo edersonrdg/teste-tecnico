@@ -17,4 +17,7 @@ export class FakeUserRepository implements UserRepository {
   async findByCpf(cpf: string): Promise<User | void> {
     return this.Users.find(user => user.cpf === cpf)
   }
+  async getUser(userId: string): Promise<User | void> {
+    return this.Users.find(user => user.id === userId)
+  }
 }

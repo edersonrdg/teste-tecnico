@@ -1,3 +1,3 @@
 export interface UseCase<T = any> {
-  execute(data: T): Promise<any>
+  execute(data: T) : Promise<any>
 }
