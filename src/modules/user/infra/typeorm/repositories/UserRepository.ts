@@ -18,12 +18,14 @@ export class UserRepositoryPG implements UserRepository {
     })
     return user
   }
-  async getUser(userId: string): Promise<User | void> {
+  async getUser(id: string): Promise<User | void> {
     const repository = getRepository(User)
-    return await repository.findOne({
+    const user =  await repository.findOne({
       where: {
-        id: userId
+        id
       }
     })
+
+    return user
   }
 }
