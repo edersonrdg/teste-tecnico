@@ -1,4 +1,4 @@
-# Social feeds
+# Teste tecnico
 ## Teste tecnico para vaga de desenvolvedor
 
 [![Coverage Status](https://coveralls.io/repos/github/edersonrdg/teste-tecnico/badge.svg?branch=main)](https://coveralls.io/github/edersonrdg/teste-tecnico?branch=main)
