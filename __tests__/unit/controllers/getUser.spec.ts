@@ -1,23 +1,39 @@
 import { GetUserController } from "@modules/user/controllers"
-import { UseCase } from "@shared/protocols/useCase";
+import { FakeUserRepository } from "@modules/user/repositories/fakes/FakeUserRepository";
+import { makeService } from "../../mocks/serviceMock";
 
-const makeGetUserService = () => {
-  class GetUserStub implements UseCase {
-    async execute(data: any): Promise<void> {
-      return new Promise((resolve) => resolve());
-    }
-  }
-  return new GetUserStub();
-};
-
+const makeSutCreate = () => {
+  const userRepo = new FakeUserRepository()
+  return { userRepo }
+}
 
 const makeSut = () => {
-  const getUserService = makeGetUserService()
+  const getUserService = makeService()
   const sut = new GetUserController(getUserService)
   return { sut, getUserService }
 }
 
 describe('[CONTROLLER] - Get user', () => {
+
+  it('should return a success message if all parameters are valid', async () => {
+    const { userRepo } = makeSutCreate()
+    const { sut, getUserService } = makeSut()
+    const spyService = jest.spyOn(getUserService, 'execute')
+    const firstrequest = {
+      body: {
+        name: "John",
+        lastname: "Doe",
+        phone: "+55119988023212",
+        cpf: '12391239123',
+      }
+    }
+
+    const response = await userRepo.create(firstrequest.body)
+    if (response) {
+      await sut.handle({ userId: response.id })
+      expect(spyService).toHaveBeenCalledWith(response.id)
+    }
+  })
   it('Should calls service with correct data', async () => {
     const { sut, getUserService } = makeSut()
     const spyService = jest.spyOn(getUserService, 'execute')

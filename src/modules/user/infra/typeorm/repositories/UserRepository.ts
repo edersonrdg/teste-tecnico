@@ -4,7 +4,7 @@ import { getRepository } from "typeorm";
 import User from "../model/User";
 
 export class UserRepositoryPG implements UserRepository {
-  async create(data: CreateUserDTO): Promise<void> {
+  async create(data: CreateUserDTO): Promise<User | void> {
     const repository = getRepository(User)
     const user = repository.create(data)
     await repository.save(user)

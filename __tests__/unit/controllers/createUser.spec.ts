@@ -1,28 +1,11 @@
 import { createUserController } from '@modules/user/controllers/createUser'
 import { BaseError } from '@shared/errors/BaseError';
-import { UseCase } from '@shared/protocols/useCase';
-import { Validation } from '@shared/protocols/validator'
-
-const makeCreateUserService = () => {
-  class CreateUserStub implements UseCase {
-    async execute(data: any): Promise<void> {
-      return new Promise((resolve) => resolve());
-    }
-  }
-  return new CreateUserStub();
-};
-
-export const makeValidation = () => {
-  class ValidationSignUpStub implements Validation {
-    validate(data: any): Error | void {
-    }
-  }
-  return new ValidationSignUpStub();
-};
+import { makeService } from '../../mocks/serviceMock';
+import { makeValidation } from '../../mocks/validationMock';
 
 const makeSut = () => {
   const validation = makeValidation()
-  const createUserService = makeCreateUserService()
+  const createUserService = makeService()
   const sut = new createUserController(createUserService, validation)
   return { sut, validation, createUserService }
 }
