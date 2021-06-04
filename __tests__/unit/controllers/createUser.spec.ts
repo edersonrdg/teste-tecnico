@@ -85,7 +85,7 @@ describe('[CONTROLLER] - Create user', () => {
       expect(error.statusCode).toBe(400);
     }
   })
-  it('should return Error if create user validation throws', async () => {
+  it('should return Error if create user service throws', async () => {
     const { sut, createUserService } = makeSut()
     jest.spyOn(createUserService, 'execute').mockImplementation(() => { throw new Error() })
     const request = {

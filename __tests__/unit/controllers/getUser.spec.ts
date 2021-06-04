@@ -46,4 +46,17 @@ describe('[CONTROLLER] - Get user', () => {
     await sut.handle(request.params)
     expect(spyService).toHaveBeenCalledWith(request.params.userId)
   })
+  it('should return Error if get user service throws', async () => {
+    const { sut, getUserService } = makeSut()
+    jest.spyOn(getUserService, 'execute').mockImplementation(() => { throw new Error() })
+    const request = {
+      userId: '123'
+    }
+    try {
+      await sut.handle(request)
+    } catch (error) {
+      expect(error.message).toEqual('Internal server error');
+      expect(error.statusCode).toBe(500);
+    }
+  })
 })
