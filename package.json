@@ -8,10 +8,12 @@
     "start:dev": "tsnd -r tsconfig-paths/register --inspect --ignore-watch node_modules src/index.ts",
     "start": "ts-node src/index.ts",
     "test": "jest",
+    "test:coveralls": "jest --coverage && coveralls",
     "typeorm": "ts-node-dev -r tsconfig-paths/register  ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "coveralls": "^3.1.0",
     "cpf-cnpj-validator": "^1.0.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
