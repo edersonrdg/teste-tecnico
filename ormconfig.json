@@ -3,7 +3,7 @@
   "host": "localhost",
   "port": 3306,
   "username": "root",
-  "password": "docker",
+  "password": "root",
   "database": "test",
   "entities": ["./src/modules/**/infra/typeorm/model/*.ts"],
   "migrations": [
